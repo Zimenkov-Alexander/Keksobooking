@@ -81,13 +81,14 @@ function createArray (numberObjects){
       return arrayObjects;
   }
 
-var similarAds = createArray(2);
+var similarAds = createArray(8);
 
 var map = document.querySelector('.map');
 var btnTemplate = document.querySelector('template').content.querySelectorAll('button')[1];
 
 function createIcon (){
   var div = document.createElement('div');
+  div.classList.add('icon');
   for (var i = 0; i<similarAds.length; i++){
       var element = btnTemplate.cloneNode(true);
       div.classList.add('map__pins')
@@ -96,6 +97,7 @@ function createIcon (){
       element.querySelector('img').setAttribute('src', similarAds[i].author.avatar);
       element.setAttribute('alt', similarAds[i].offer.title);
       element.classList.add ('elem');
+      element.id = 'elem' + i;
       div.appendChild(element);
   }
   return div;
@@ -105,9 +107,12 @@ var artTemplate = document.querySelector('template').content.querySelector('arti
 
 function createArticle (){
   var pool = document.querySelector('.map__filters-container');
-  // var elem = document.querySelectorAll('.elem');
   for (var i = 0; i<similarAds.length; i++){
     var element = artTemplate.cloneNode(true);
+    var div = document.createElement('div')
+    div.classList.add('hidden');
+    div.classList.add('popup-window');
+    div.id = 'window' + i;
       element.querySelector('h3').textContent = similarAds[i].offer.title;
       element.querySelector('h3').classList.add('popup__title');
       element.querySelectorAll('p')[0].textContent = similarAds[i].offer.address;
@@ -136,15 +141,13 @@ function createArticle (){
         element.querySelectorAll('p')[4].textContent = similarAds[i].offer.description;
         element.querySelectorAll('p')[4].classList.add('popup__description');
         element.querySelectorAll('img')[0].setAttribute('src', similarAds[i].author.avatar);
-        element.setAttribute('disabled', 'disabled');
-        
-        
         // element.querySelectorAll('img')[1].setAttribute('src', similarAds[i].offer.photos[0]);
-      pool.before(element);
-    }
+        div.appendChild(element)
+        pool.before(div);
+      }
   return pool;
 }
-var createdAd = createArticle();
+
 
 var fieldset = document.querySelectorAll('fieldset');
 var address = document.querySelector('#address');
@@ -162,35 +165,41 @@ var removeDisabled = function(element){
 };
 var fieldsetDisabled = addDisabled(fieldset);
 
-
-
 var btnMap = document.querySelector('.map__pin--main');
 var mapPins = document.querySelector('.map__pins');
 var iconBtn = createIcon();
+var createdAd = createArticle();
+var arrIconBtn = 0; 
+// var btnPopupClose = document.querySelector('.popup__close');
+// var btnPopupClose = window.getComputedStyle(document.querySelector('.popup__close'),':after');
 
 btnMap.addEventListener('mouseup', function(){
   fieldsetDisabled = removeDisabled(fieldset);
   map.classList.remove('map--faded');
   address.setAttribute('placeholder', (getCoords(btnMap).right-(DIMENSIONS_MAP_PIN_IMG.x/2)) +
   ':' + (getCoords(btnMap).top-DIMENSIONS_MAP_PIN_IMG.y-DIMENSIONS_MAP_PIN_IMG.after));
-  mapPins.appendChild(iconBtn)
-
+  mapPins.appendChild(iconBtn);
+  arrIconBtn = document.querySelector('.map__pins').querySelectorAll('.elem');
 });  
 
-// var elem = document.querySelectorAll('.elem'); 
-
 iconBtn.addEventListener('click', function(e){
-  // var target = e.target;
+  var popupDiv = document.querySelectorAll('.popup-window');
+  function openPopup (i){
+    popupDiv[i].classList.remove('hidden');
+  }
+  for (var i=0; i <arrIconBtn.length; i++){
+    if (e.target === document.querySelectorAll('img')[i+1]){
+      popupDiv[i].classList.remove('hidden');
+      event.preventDefault()
+    }
+  }
+})  
+document.querySelector('.map').addEventListener('keydown', function(e){
+  var popupDiv = document.querySelectorAll('.popup-window');
+  if (e.keyCode === 27) {
+    for (var i =0; i <arrIconBtn.length; i++){
+      popupDiv[i].classList.add('hidden');
+    }   
+  } 
 
-}) 
-
-
-
-// var btnClose = document.querySelector('.popup__close');
-// console.log(btnClose);
-
-
-// btnClose.addEventListener('click', function(){
-//   btnClose.hidden = true;
-
-// })
+})
