@@ -373,16 +373,27 @@ textarea:focus {
 .popup h4 {
   margin-bottom: 0.3em;
 }
+.popup__pictures{
+	text-align: center;
+	padding: 0;
+	max-height: 10%;
+	/* margin-bottom: -80px; */
+}
 
 .popup__pictures li {
   display: inline-block;
   vertical-align: middle;
+  margin: 0 auto;
+}
+.popup__pictures li img{
+  max-width: 100%;
 }
 
 .popup__avatar {
   position: absolute;
   bottom: 100%;
   margin-bottom: 10px;
+  
 }
 
 .popup__close {
