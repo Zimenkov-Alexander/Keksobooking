@@ -52,29 +52,35 @@ class AnnouncementCard {
 
 		const div = document.createElement('div');
 		div.innerHTML = `
-			<img src=${avatar} class="popup__avatar" width="70" height="70">
-			<button class="popup__close">Закрыть</button>
-			<h3>${title}</h3>
-			<p><small>${x} Tōkyō-to, Chiyoda-ku, Ichibanchō, ${y}</small></p>
-			<p class="popup__price">${price} &#x20bd;/ночь</p>
-			<h4>${type}</h4>
-			<p>${rooms} комнаты для ${guests} гостей</p>
-			<p>Заезд после ${checkin}, выезд до ${checkout}</p>
-			<ul class="popup__features">
-			  <li class="feature feature--${features}"></li>
-			</ul>
-			<p>${description} (тут будет отзыв)</p>
-			<ul class="popup__pictures">
-			  <li><img src=${photos[0]}></li>
-			</ul>
+			<article class="map__card">
+				<img src=${avatar} class="popup__avatar" width="70" height="70">
+				<button class="popup__close">Закрыть</button>
+				<h3>${title}</h3>
+				<p><small>${x} Tōkyō-to, Chiyoda-ku, Ichibanchō, ${y}</small></p>
+				<p class="popup__price">${price} &#x20bd;/ночь</p>
+				<h4>${type}</h4>
+				<p>${rooms} комнаты для ${guests} гостей</p>
+				<p>Заезд после ${checkin}, выезд до ${checkout}</p>
+				<ul class="popup__features">
+					<li class="feature feature--${features}"></li>
+				</ul>
+				<p>${description} (тут будет отзыв)</p>
+				<ul class="popup__pictures">
+				//Место для фото	
+				</ul>
+			</article>
+			<button style="left: ${x}px; top: ${y}px;" class="map__pin">
+				<img src=${avatar} width="40" height="40" draggable="false">
+			</button>
 		`;
-		div.classList.add('map__card');
+		// <li><img src=${photos[0]}></li>
+		div.classList.add('map__card__wrapper');
 		document.querySelector('.map__pins').append(div);
 	}
 }
 
 let cards = createCard(8);
-// cards.forEach(item => {item.render();});
+cards.forEach(item => {item.render();});
 
 function createCard (umberCards) {
 	let arr = [];
@@ -91,8 +97,8 @@ function createCard (umberCards) {
 			featuresTemplate[getRandomNumber(0, featuresTemplate.length - 1)],
 			' ',
 			photosTemplate,
-			mapWrapper.offsetWidth,
-			getRandomNumber(130, 630)
+			getRandomNumber(20, mapWrapper.offsetWidth-50) ,
+			getRandomNumber(130, 500)
 		);
 	}
 	return arr;
