@@ -38,7 +38,10 @@ function moveat (fieldset, address, mapPinMain) {
 		
 			btnCards.forEach((item,i) => {
 				item.addEventListener('click', () => {
+					
+					mapCard.forEach(item => item.classList.add('hidden'));
 					mapCard[i].classList.remove('hidden');
+
 					document.querySelectorAll('.popup__close')[i].addEventListener('click', () => {
 					mapCard[i].classList.add('hidden');
 					});
