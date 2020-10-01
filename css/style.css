@@ -202,8 +202,10 @@ textarea:focus {
 
   position: absolute;
   z-index: 1;
+}
 
-  transform: translate(-50%, -50%);
+.map__pin--main svg{
+	pointer-events: none;
 }
 
 .map__pin img {
@@ -241,8 +243,10 @@ textarea:focus {
 }
 
 .map__pin--main {
+	/* margin: 0 auto; */
+  position: absolute;
   left: 50%;
-  top: 375px;
+  top: 50%; 
 
   width: 65px;
   height: 65px;
