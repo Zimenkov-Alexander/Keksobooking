@@ -360,19 +360,16 @@ function moveat (fieldset, address, mapPinMain) {
 __webpack_require__.r(__webpack_exports__);
 
 function submit(selector) {
-	console.log(selector);
-	console.log(document.querySelector(selector));
-
 	document.querySelector(selector).addEventListener('submit', (evt) => {
 		evt.preventDefault();
 
 		let modal = document.querySelector('.modal__wrapper');
 		
-		let showModal = () => {
+		function showModal () {
 			modal.classList.remove('hidden');
 			setTimeout(hideModal, 2000);
 		}
-		let hideModal = () => {
+		function hideModal () {
 			modal.classList.add('hidden');
 		}
 
