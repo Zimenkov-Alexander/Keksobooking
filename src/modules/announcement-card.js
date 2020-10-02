@@ -42,7 +42,7 @@ class AnnouncementCard {
 				<h3>${title}</h3>
 				<p><small>${x} Tōkyō-to, Chiyoda-ku, Ichibanchō, ${y}</small></p>
 				<p class="popup__price">${price} &#x20bd;/ночь</p>
-				<h4>${type}</h4>
+				<h4 class = "${type}">${type}</h4>
 				<p>${rooms} комнаты для ${guests} гостей</p>
 				<p>Заезд после ${checkin}, выезд до ${checkout}</p>
 				<ul class="popup__features">
@@ -50,14 +50,15 @@ class AnnouncementCard {
 				</ul>
 				<p>${description} (тут будет отзыв)</p>
 				<ul class="popup__pictures">
-				//Место для фото	
+					<li><img src=${photos[0]}></li>	
+					<li><img src=${photos[1]}></li>	
 				</ul>
 			</article>
 			<button style="left: ${x}px; top: ${y}px;" class="map__pin card">
 				<img src=${avatar} width="40" height="40" draggable="false">
 			</button>
 		`;
-		// <li><img src=${photos[0]}></li>
+		
 		div.classList.add('map__card__wrapper');
 		document.querySelector('.map__pins').append(div);
 	}

@@ -96,6 +96,8 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_moveat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/moveat */ "./src/modules/moveat.js");
+/* harmony import */ var _modules_submit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/submit */ "./src/modules/submit.js");
+
 
 
 
@@ -105,12 +107,12 @@ window.addEventListener('DOMContentLoaded', () => {
 		  address = document.querySelector('#address'),
 		  mapPinMain = document.querySelector('.map__pin--main');
 
-	address.value = `Left: ${mapPinMain.offsetLeft} и Top: ${mapPinMain.offsetTop}`; 	
+	address.value = `Улица: ${mapPinMain.offsetLeft-500} дом: ${mapPinMain.offsetTop}`; 	
 	fieldset.forEach(item => {item.setAttribute('disabled', 'disabled');});
 
 
 	Object(_modules_moveat__WEBPACK_IMPORTED_MODULE_0__["moveat"])(fieldset, address, mapPinMain);
-
+	Object(_modules_submit__WEBPACK_IMPORTED_MODULE_1__["default"])('#form');
 });
 
 /***/ }),
@@ -168,7 +170,7 @@ class AnnouncementCard {
 				<h3>${title}</h3>
 				<p><small>${x} Tōkyō-to, Chiyoda-ku, Ichibanchō, ${y}</small></p>
 				<p class="popup__price">${price} &#x20bd;/ночь</p>
-				<h4>${type}</h4>
+				<h4 class = "${type}">${type}</h4>
 				<p>${rooms} комнаты для ${guests} гостей</p>
 				<p>Заезд после ${checkin}, выезд до ${checkout}</p>
 				<ul class="popup__features">
@@ -176,14 +178,15 @@ class AnnouncementCard {
 				</ul>
 				<p>${description} (тут будет отзыв)</p>
 				<ul class="popup__pictures">
-				//Место для фото	
+					<li><img src=${photos[0]}></li>	
+					<li><img src=${photos[1]}></li>	
 				</ul>
 			</article>
 			<button style="left: ${x}px; top: ${y}px;" class="map__pin card">
 				<img src=${avatar} width="40" height="40" draggable="false">
 			</button>
 		`;
-		// <li><img src=${photos[0]}></li>
+		
 		div.classList.add('map__card__wrapper');
 		document.querySelector('.map__pins').append(div);
 	}
@@ -300,7 +303,7 @@ function moveat (fieldset, address, mapPinMain) {
 		mapPinMain.addEventListener('mouseup', () => {
 			mapPinMain.removeEventListener('mousemove',onMouseMove);
 			mapPinMain.onmouseup = null;
-			address.value = `Left: ${mapPinMain.offsetLeft} и Top: ${mapPinMain.offsetTop + 70}`; 	
+			address.value = `Улица: ${mapPinMain.offsetLeft-500} дом: ${mapPinMain.offsetTop}`; 	
 		});
 	
 		fieldset.forEach(item => {item.removeAttribute('disabled');});
@@ -346,6 +349,41 @@ function moveat (fieldset, address, mapPinMain) {
 
 /***/ }),
 
+/***/ "./src/modules/submit.js":
+/*!*******************************!*\
+  !*** ./src/modules/submit.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+function submit(selector) {
+	console.log(selector);
+	console.log(document.querySelector(selector));
+
+	document.querySelector(selector).addEventListener('submit', (evt) => {
+		evt.preventDefault();
+
+		let modal = document.querySelector('.modal__wrapper');
+		
+		let showModal = () => {
+			modal.classList.remove('hidden');
+			setTimeout(hideModal, 2000);
+		}
+		let hideModal = () => {
+			modal.classList.add('hidden');
+		}
+
+		setTimeout(showModal, 500);
+	});
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (submit);
+
+/***/ }),
+
 /***/ "./src/modules/template.js":
 /*!*********************************!*\
   !*** ./src/modules/template.js ***!
@@ -363,8 +401,7 @@ const template = {
 	type: ['palace', 'flat', 'house', 'bungalo'],
 	check: ['12:00', '13:00', '14:00'],
 	features: ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'],
-	photos: ["http://o0.github.io/assets/images/tokyo/hotel1.jpg",
-			"http://o0.github.io/assets/images/tokyo/hotel2.jpg",
+	photos: ["http://o0.github.io/assets/images/tokyo/hotel2.jpg",
 			"http://o0.github.io/assets/images/tokyo/hotel3.jpg"]
 };
 

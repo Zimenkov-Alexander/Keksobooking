@@ -340,9 +340,11 @@ textarea:focus {
 }
 
 .map__card {
-  width: 230px;
+  min-width: 230px;
+  max-width: 300px;
 
   position: absolute;
+
   left: 20px;
   top: 150px;
 
@@ -378,16 +380,16 @@ textarea:focus {
   margin-bottom: 0.3em;
 }
 .popup__pictures{
+	display: flex;
+	align-items: center;
 	text-align: center;
 	padding: 0;
-	max-height: 10%;
-	/* margin-bottom: -80px; */
+	max-height: 50%;
 }
 
 .popup__pictures li {
   display: inline-block;
-  vertical-align: middle;
-  margin: 0 auto;
+  width: 50%;
 }
 .popup__pictures li img{
   max-width: 100%;
@@ -714,4 +716,31 @@ textarea:focus {
 
 .footer-social-item-vk {
   background-position: -10px -10px;
+}
+.modal__wrapper{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+.modal{
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 500px;
+	height: 300px;
+	margin-top: -150px;
+	margin-left: -250px;
+	border-radius: 30px;
+	background-color:  hsl(10, 100%, 70%);
+}
+
+.modal__text{
+	text-align: center;
+	margin-top: 95px;
+	padding: 0 20px;
+	font-size: 2em;
+	color:white
 }

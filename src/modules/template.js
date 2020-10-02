@@ -6,8 +6,7 @@ const template = {
 	type: ['palace', 'flat', 'house', 'bungalo'],
 	check: ['12:00', '13:00', '14:00'],
 	features: ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'],
-	photos: ["http://o0.github.io/assets/images/tokyo/hotel1.jpg",
-			"http://o0.github.io/assets/images/tokyo/hotel2.jpg",
+	photos: ["http://o0.github.io/assets/images/tokyo/hotel2.jpg",
 			"http://o0.github.io/assets/images/tokyo/hotel3.jpg"]
 };
 

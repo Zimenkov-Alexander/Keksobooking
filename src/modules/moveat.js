@@ -22,7 +22,7 @@ function moveat (fieldset, address, mapPinMain) {
 		mapPinMain.addEventListener('mouseup', () => {
 			mapPinMain.removeEventListener('mousemove',onMouseMove);
 			mapPinMain.onmouseup = null;
-			address.value = `Left: ${mapPinMain.offsetLeft} и Top: ${mapPinMain.offsetTop + 70}`; 	
+			address.value = `Улица: ${mapPinMain.offsetLeft-500} дом: ${mapPinMain.offsetTop}`; 	
 		});
 	
 		fieldset.forEach(item => {item.removeAttribute('disabled');});
